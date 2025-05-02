@@ -1,0 +1,18 @@
+package com.example.process.management.Repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.example.process.management.Model.SubProcess;
+import com.example.process.management.Model.User;
+
+@Repository
+public interface SubProcessRepository extends JpaRepository<SubProcess,Long>{
+
+        @Query("SELECT c FROM SubProcess c WHERE c.process_id= :id")
+        List< SubProcess> findAllByProcessID(@Param("id") Long id);
+}
