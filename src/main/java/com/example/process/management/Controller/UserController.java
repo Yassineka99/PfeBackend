@@ -44,7 +44,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
     @PostMapping("/delete")
-    public void deleteUser(@RequestBody Long id)
+    public void deleteUser(@PathVariable Long id)
     {
         userService.deleteUser(id);
     }
