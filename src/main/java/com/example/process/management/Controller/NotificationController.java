@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.process.management.Model.Notification;
 import com.example.process.management.Service.NotificationService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/api/notifications")
@@ -26,10 +29,10 @@ public class NotificationController
     {
         return notifService.getNotificationByID(id);
     }
-    @GetMapping("/id/{userid}")
-    public ResponseEntity<Notification> getNotificationByUserID(@PathVariable Long id )
+    @GetMapping("/userid/{userid}")
+    public ResponseEntity<Notification> getNotificationByUserID(@PathVariable Long userid )
     {
-        Notification notif = notifService.getNotificationByUserID(id);
+        Notification notif = notifService.getNotificationByUserID(userid);
         if (notif !=null)
         {
              return ResponseEntity.status(HttpStatus.OK).body(notif);
@@ -37,5 +40,12 @@ public class NotificationController
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(notif);
         }
-    }    
+    }
+    @PostMapping("/create")
+    public ResponseEntity<Notification> CreateNotification(@RequestBody Notification entity) {
+        //TODO: process POST request
+        Notification notiToSave =notifService.SaveNotification(entity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(notiToSave);
+    }
+        
 }

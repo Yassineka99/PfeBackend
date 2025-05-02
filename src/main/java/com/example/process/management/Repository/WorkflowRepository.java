@@ -6,11 +6,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.process.management.Model.Notification;
-import com.example.process.management.Model.User;
+import com.example.process.management.Model.Workflow;
 
 @Repository
-public interface NotificationRepository extends JpaRepository<Notification,Long>{
-       @Query("SELECT c FROM Notification c WHERE c.user_to_notify= :userid")
-        Notification findByUserToNotify(@Param("userid") Long userid);
-        
+public interface WorkflowRepository extends JpaRepository<Workflow,Long> {
+        @Query("SELECT c FROM Workflow c WHERE c.name= :workflowname")
+        Workflow findWorkflowByName(@Param("workflowname") String workflowname);
+    
 }

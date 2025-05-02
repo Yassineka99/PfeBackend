@@ -22,5 +22,9 @@ public class NotificationService {
     {
          return notifRepo.findByUserToNotify(id);
     }
+    public Notification SaveNotification(Notification notification)
+    {
+          return notifRepo.save(notification);
+    }
 
 }
