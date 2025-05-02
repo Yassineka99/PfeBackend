@@ -8,7 +8,7 @@ public class WorkflowMapper {
     
     public WorkflowDto TODO (Workflow workflow)
     {
-        if(workflow !=null)
+        if(workflow ==null)
         {
             return null ;
         }
