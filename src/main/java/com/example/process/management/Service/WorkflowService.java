@@ -1,5 +1,6 @@
 package com.example.process.management.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,9 @@ public class WorkflowService {
       public Workflow getWorkflowByName (String workflow)
       {
         return workflowrepo.findWorkflowByName(workflow);
+      }
+      public List<Workflow> findall ()
+      {
+        return workflowrepo.findAll();
       }
 }

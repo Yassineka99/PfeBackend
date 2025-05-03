@@ -5,7 +5,7 @@ import com.example.process.management.Model.User;
 
 
 public class UserMapper {
-    // Example method to convert Client to UserDto
+ 
     public UserDto clientToUserDto(User client) {
         if (client == null) {
             return null;
@@ -20,7 +20,7 @@ public class UserMapper {
         return UserDto;
     }
 
-    // Example method to convert UserDto to Client
+   
     public User UserDtoToClient(UserDto UserDto) {
         if (UserDto == null) {
             return null;
