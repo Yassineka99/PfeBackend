@@ -15,8 +15,11 @@ public class SubprocessMapper {
             dto.setId(sub.getId());
             dto.setName(sub.getName());
             dto.setCreated_by(sub.getCreated_by());
+            dto.setStatus(sub.getStatus()); 
             dto.setMessage(sub.getMessage());
             dto.setAssigned_to(sub.getAssigned_to());
+            dto.setCreated_at(sub.getCreated_at());  // Add created_at field
+            dto.setFinished_at(sub.getFinished_at());
             return dto ;
         }
     }
@@ -30,9 +33,12 @@ public class SubprocessMapper {
             SubProcess dto = new SubProcess() ;
             dto.setId(sub.getId());
             dto.setName(sub.getName());
+            dto.setStatus(sub.getStatus()); 
             dto.setCreated_by(sub.getCreated_by());
             dto.setMessage(sub.getMessage());
             dto.setAssigned_to(sub.getAssigned_to());
+            dto.setCreated_at(sub.getCreated_at());  // Add created_at field
+            dto.setFinished_at(sub.getFinished_at());
             return dto ;
         }
     }

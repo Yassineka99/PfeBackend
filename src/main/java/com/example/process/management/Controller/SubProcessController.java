@@ -66,4 +66,10 @@ public class SubProcessController {
         return subProcessService.getbyuserandprocessid(user,process);
     }
 
+    @GetMapping("/get-all-by-status-and-user-id/{status}/{userid}")
+    public List<SubProcess> findAllByStatusAndAssignedTo( @PathVariable Long status ,@PathVariable Long userid )
+    {
+        return subProcessService.findAllByStatusAndAssignedTo(status,userid);
+    }
+
 }

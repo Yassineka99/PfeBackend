@@ -67,5 +67,10 @@ public class SubProcessService {
         return subProcessRepository.findAllByProcessIdAndUserId(process,user);
     }
 
+    public List<SubProcess> findAllByStatusAndAssignedTo(Long status,Long userid)
+    {
+        return subProcessRepository.findAllByStatusAndAssignedTo(status,userid);
+    }
+
     
 }

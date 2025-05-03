@@ -74,8 +74,8 @@ public class UserController {
         }
         }
 
-        @GetMapping("/get-all-by-status-id/{id}")
-        public List<User> GetAllbyStatusid(@PathVariable Long id){
+        @GetMapping("/get-all-by-role-id/{id}")
+        public List<User> GetAllbyRoleid(@PathVariable Long id){
             return userService.getUserByRoleId(id);
         }
 
