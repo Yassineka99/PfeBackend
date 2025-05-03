@@ -35,7 +35,7 @@ public class SubProcessController {
         SubProcess subupdate = subProcessService.UpdateSubProcess(sub);
         return ResponseEntity.status(HttpStatus.OK).body(subupdate);
     }
-    @PostMapping("/delete")
+    @PostMapping("/delete/{id}")
     public void DeleteSubProcess(@PathVariable Long id )
     {
         subProcessService.DeleteSubProcess(id);

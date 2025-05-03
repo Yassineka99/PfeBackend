@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.process.management.Model.SubProcess;
+import com.example.process.management.Model.User;
 import com.example.process.management.Model.Workflow;
 import com.example.process.management.Service.WorkflowService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,12 +49,22 @@ public class WorkflowController {
         {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(workflow);
         }
-    }
+        }
         @GetMapping("/get-all")
         public List<Workflow> GetAllWorkflows()
         {
         return workflowService.findall();
         }
     
-    
+        @PostMapping("/update")
+        public ResponseEntity <Workflow> Updateworkflow(@RequestBody Workflow workflow){
+            Workflow updatedworkflow = workflowService.update(workflow);
+            return ResponseEntity.status(HttpStatus.OK).body(updatedworkflow);
+        }
+
+        @PostMapping("/delete/{id}")
+        public void DeleteSubProcess(@PathVariable Long id )
+        {
+            workflowService.DeleteWorkflow(id);
+        }
 }
