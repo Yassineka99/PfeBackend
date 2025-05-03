@@ -15,4 +15,9 @@ public interface SubProcessRepository extends JpaRepository<SubProcess,Long>{
 
         @Query("SELECT c FROM SubProcess c WHERE c.process_id= :id")
         List< SubProcess> findAllByProcessID(@Param("id") Long id);
+        @Query("SELECT c FROM SubProcess c WHERE c.assigned_to= :id")
+        List< SubProcess> findAlluserID(@Param("id") Long id);
+        @Query("SELECT c FROM SubProcess c WHERE c.process_id = :processId AND c.assigned_to = :userId")
+        List<SubProcess> findAllByProcessIdAndUserId(@Param("processId") Long processId, @Param("userId") Long userId);
+
 }

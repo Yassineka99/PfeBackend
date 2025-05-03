@@ -50,5 +50,20 @@ public class SubProcessController {
     {
         return subProcessService.GetAllByProcessID(id);
     }
+    @GetMapping("/get-all")
+    public List<SubProcess> GetAllSubProcess( )
+    {
+        return subProcessService.GetAll();
+    }
+    @GetMapping("/get-all-by-user-id/{id}")
+    public List<SubProcess> GetAllbyuserid( @PathVariable Long id)
+    {
+        return subProcessService.getallbyuserid(id);
+    }
+    @GetMapping("/get-all-by-user-process-id/{user}/{process}")
+    public List<SubProcess> GetAllbyuserid( @PathVariable Long process ,@PathVariable Long user )
+    {
+        return subProcessService.getbyuserandprocessid(user,process);
+    }
 
 }

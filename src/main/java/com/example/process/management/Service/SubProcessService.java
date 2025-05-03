@@ -54,6 +54,18 @@ public class SubProcessService {
     {
         return subProcessRepository.findAllByProcessID(id);
     }
+    public List<SubProcess> GetAll()
+    {
+        return subProcessRepository.findAll();
+    }
+    public List<SubProcess> getallbyuserid(Long id)
+    {
+        return subProcessRepository.findAlluserID(id);
+    }
+    public List<SubProcess> getbyuserandprocessid(Long user,Long process)
+    {
+        return subProcessRepository.findAllByProcessIdAndUserId(process,user);
+    }
 
     
 }
