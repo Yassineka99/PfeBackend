@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -34,6 +35,12 @@ public class User {
     private String password ;
     @Column(name = "role")
     private int role;
+@Lob
+@Column(columnDefinition = "LONGTEXT")
+private String image; // Store the image as binary data
+
+    @Column(name = "image_type")
+    private String imageType;
 
 }
 

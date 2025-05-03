@@ -17,6 +17,8 @@ public class UserMapper {
         UserDto.setPhone(client.getPhone());
         UserDto.setRole(client.getRole());
         UserDto.setPassword(client.getPassword());
+        UserDto.setImage(client.getImage());
+        UserDto.setImageType(client.getImageType());
         return UserDto;
     }
 
@@ -32,6 +34,8 @@ public class UserMapper {
         client.setPhone(UserDto.getPhone());
         client.setRole(UserDto.getRole());
         client.setPassword(UserDto.getPassword());
+        client.setImage(UserDto.getImage());
+        client.setImageType(UserDto.getImageType());
         return client;
     }
 }

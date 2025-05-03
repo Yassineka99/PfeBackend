@@ -1,19 +1,25 @@
 package com.example.process.management.Controller;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.example.process.management.Dto.UserDto;
 import com.example.process.management.Model.User;
 import com.example.process.management.Service.UserService;
 
@@ -72,5 +78,41 @@ public class UserController {
         public List<User> GetAllbyStatusid(@PathVariable Long id){
             return userService.getUserByRoleId(id);
         }
+
+        @PostMapping("/uploadImage/{userId}")
+        public ResponseEntity<User> uploadUserImage(@PathVariable Long userId, 
+                                                @RequestParam("image") MultipartFile image) {
+        User updatedUser = userService.uploadImage(userId, image);
+        return updatedUser != null ?
+               ResponseEntity.status(HttpStatus.OK).body(updatedUser) :
+               ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
+        @GetMapping("/get/{id}/image")
+        public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
+            User user = userService.getUserByID(id).orElse(null);
+            if (user == null || user.getImage() == null) return ResponseEntity.notFound().build();
+        
+            byte[] imageBytes = Base64.getDecoder().decode(user.getImage()); // Decode base64 string to bytes
+        
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.parseMediaType(user.getImageType()));
+            return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
+        }
+        @PostMapping("/update/picture")
+public ResponseEntity<User> updateUserProfilePicture(@RequestBody UserDto userDto) {
+    Optional<User> optionalUser = userService.getUserByID(userDto.getId());
+    if (optionalUser.isPresent()) {
+        User user = optionalUser.get();
+        user.setImage(userDto.getImage());             // base64 string
+        user.setImageType(userDto.getImageType());
+        User updatedUser = userService.saveUser(user);
+        return ResponseEntity.ok(updatedUser);
+    } else {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+}
+
+
     
 }
