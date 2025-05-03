@@ -67,5 +67,10 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(User);
         }
         }
+
+        @GetMapping("/get-all-by-status-id/{id}")
+        public List<User> GetAllbyStatusid(@PathVariable Long id){
+            return userService.getUserByRoleId(id);
+        }
     
 }
