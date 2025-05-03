@@ -1,6 +1,7 @@
 package com.example.process.management.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,17 @@ public class Processservice {
     public Optional<Process> getProcessById(Long id)
     {
        return processRepository.findById(id);
+    }
+    public List<Process> getProcessByuserId(Long id)
+    {
+       return processRepository.findAllByuserID(id);
+    }
+    public List<Process> getProcessByWorkflowId(Long id)
+    {
+       return processRepository.findAllByWorkflowID(id);
+    }
+    public List<Process> getProcessBystatusId(Long id)
+    {
+       return processRepository.findAllByStatusID(id);
     }
 }
