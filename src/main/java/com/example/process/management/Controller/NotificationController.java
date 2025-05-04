@@ -1,5 +1,6 @@
 package com.example.process.management.Controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.process.management.Model.Notification;
 import com.example.process.management.Service.NotificationService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -30,16 +32,9 @@ public class NotificationController
         return notifService.getNotificationByID(id);
     }
     @GetMapping("/userid/{userid}")
-    public ResponseEntity<Notification> getNotificationByUserID(@PathVariable Long userid )
+    public List<Notification> getNotificationByUserID(@PathVariable Long userid )
     {
-        Notification notif = notifService.getNotificationByUserID(userid);
-        if (notif !=null)
-        {
-             return ResponseEntity.status(HttpStatus.OK).body(notif);
-        }
-        else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(notif);
-        }
+        return notifService.getNotificationByUserID(userid);
     }
     @PostMapping("/create")
     public ResponseEntity<Notification> CreateNotification(@RequestBody Notification entity) {
@@ -47,5 +42,17 @@ public class NotificationController
         Notification notiToSave =notifService.SaveNotification(entity);
         return ResponseEntity.status(HttpStatus.CREATED).body(notiToSave);
     }
+        @PostMapping("/read/{userId}")
+        public ResponseEntity<String> markAllAsRead(@PathVariable Long userId) {
+            notifService.ReadNotifications(userId);
+        return ResponseEntity.ok("All notifications marked as read");
+    }
+
+    @GetMapping("/unread-notification/{userid}")
+    public List<Notification> getUnreadNotification(@PathVariable Long userid )
+    {
+        return notifService.getNonReadNotifications(userid);
+    }
+    
         
 }

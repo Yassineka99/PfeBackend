@@ -14,6 +14,7 @@ public class NotificationMapper {
         noDto.setId(notif.getId());
         noDto.setUser_to_notify(notif.getUser_to_notify());
         noDto.setMessage(notif.getMessage());
+        noDto.setVisiblity(notif.getVisiblity());
         return noDto;
 
     }
@@ -27,6 +28,7 @@ public class NotificationMapper {
         notif.setId(dto.getId());
         notif.setMessage(dto.getMessage());
         notif.setUser_to_notify(dto.getUser_to_notify());
+        notif.setVisiblity(dto.getVisiblity());
         return notif ;
     }
 }

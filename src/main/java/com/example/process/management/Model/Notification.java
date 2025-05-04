@@ -19,5 +19,7 @@ public class Notification {
     private Long user_to_notify;
     @Column(name="message")
     private String message ;
+    @Column(name="visiblity")
+    private int visiblity ;
 
 }
