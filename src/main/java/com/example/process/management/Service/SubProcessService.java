@@ -27,12 +27,18 @@ public class SubProcessService {
     {
         SubProcess currentSub = subProcessRepository.findById(sub.getId()).orElse(null);
         if ( currentSub != null )
-        {
+        {  System.out.println("sub process id : "+sub.getId()+"sub process name :"+sub.getName()+"sub process status "+sub.getStatus());
+             if(sub.getAssigned_to()!=null)
             currentSub.setAssigned_to(sub.getAssigned_to());
+            if(sub.getName()!=null)
             currentSub.setName(sub.getName());
+            if(sub.getMessage()!=null)
             currentSub.setMessage(sub.getMessage());
+            if(sub.getProcess_id()!=null)
             currentSub.setProcess_id(sub.getProcess_id());
-            return currentSub;
+            if(sub.getStatus()!=null)
+            currentSub.setStatus(sub.getStatus());
+            return subProcessRepository.save(currentSub);
         }
         return null ;
 
