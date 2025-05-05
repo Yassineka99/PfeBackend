@@ -15,6 +15,7 @@ import com.example.process.management.Model.Workflow;
 public interface WorkflowRepository extends JpaRepository<Workflow,Long> {
         @Query("SELECT c FROM Workflow c WHERE c.name= :workflowname")
         Workflow findWorkflowByName(@Param("workflowname") String workflowname);
+        
 
     
 }

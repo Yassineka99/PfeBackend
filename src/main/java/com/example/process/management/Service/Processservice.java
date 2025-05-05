@@ -23,13 +23,19 @@ public class Processservice {
     {
         Process pro = processRepository.findById(process.getId()).orElse(null);
         if (pro != null)
-        {
+        {   if(process.getName() !=null)
             pro.setName(process.getName());
+            if(process.getWorkflow_id() !=null)
             pro.setWorkflow_id(process.getWorkflow_id());
+            if(process.getStatus_id() !=null)
             pro.setStatus_id(process.getStatus_id());
+            if(process.getOrder() != 0  )
             pro.setOrder(process.getOrder());
+            if(process.getCreated_by() !=null)
             pro.setCreated_by(process.getCreated_by());
+            if(process.getUpdated_by() !=null)
             pro.setUpdated_by(process.getUpdated_by());
+            if(process.getUpdated_at() !=null)
             pro.setUpdated_at(process.getUpdated_at());
             return processRepository.save(pro) ;
             
