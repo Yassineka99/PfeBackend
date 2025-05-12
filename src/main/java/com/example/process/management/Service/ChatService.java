@@ -24,6 +24,11 @@ public class ChatService {
         return chatrepo.findMessageByReciever(id);
     }
 
+    public List<Chat> getMessagesBySenderAndReciever(Long sender,Long reciever)
+    {
+        return chatrepo.findMessageBySenderAndReciever(sender,reciever);
+    }
+
     public Chat CreateMessage (Chat chat)
     {   
         chat.setFrom_user_date(new Date());

@@ -44,4 +44,9 @@ public class ChatController {
     public List<Chat> GetAllbyRecieverid(@PathVariable Long id){
         return chatService.getMessagesByReciever(id);
     }
+
+    @GetMapping("/get-all-by-sender-and-reciever-id/{sender}/{reciever}")
+    public List<Chat> getMessagesBySenderAndReciever(@PathVariable Long sender,@PathVariable Long reciever){
+        return chatService.getMessagesBySenderAndReciever(sender,reciever);
+    }
 }
