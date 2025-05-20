@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.process.management.Repository.ProcessRepository;
+import com.example.process.management.Repository.SubProcessRepository;
 import com.example.process.management.Model.Process;
+import com.example.process.management.Model.SubProcess;
 
 @Service
 public class Processservice {
     @Autowired
     ProcessRepository processRepository ;
-    
+    @Autowired
+    SubProcessRepository subProcessRepository;
     public Process SaveProcess(Process process)
     {   process.setCreated_at(new Date());
         return processRepository.save(process);
@@ -60,9 +63,25 @@ public class Processservice {
     {
        return processRepository.findAllByuserID(id);
     }
-    public List<Process> getProcessByWorkflowId(Long id)
-    {
-       return processRepository.findAllByWorkflowID(id);
+    public List<Process> getProcessByWorkflowId(Long workflowId) {
+        List<Process> processes = processRepository.findAllByWorkflowID(workflowId);
+
+        for (Process process : processes) {
+            List<SubProcess> subProcesses = subProcessRepository.findAllByProcessID(process.getId());
+
+            if (!subProcesses.isEmpty() &&
+                subProcesses.stream().allMatch(sp -> sp.getStatus() != null && sp.getStatus() == 3)) {
+
+                // Update the process status if not already 3
+                if (process.getStatus_id() == null || process.getStatus_id() != 3) {
+                    process.setStatus_id(3L);
+                    process.setUpdated_at(new Date());
+                    processRepository.save(process);
+                }
+            }
+        }
+
+        return processes;
     }
     public List<Process> getProcessBystatusId(Long id)
     {

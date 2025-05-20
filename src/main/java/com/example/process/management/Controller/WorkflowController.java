@@ -1,11 +1,14 @@
 package com.example.process.management.Controller;
 
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -66,5 +69,17 @@ public class WorkflowController {
         public void DeleteSubProcess(@PathVariable Long id )
         {
             workflowService.DeleteWorkflow(id);
+        }
+
+        @GetMapping("/get/{id}/image")
+        public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
+            Workflow workflow = workflowService.getWorkflowByID(id).orElse(null);
+            if (workflow == null || workflow.getImage() == null) return ResponseEntity.notFound().build();
+        
+            byte[] imageBytes = Base64.getDecoder().decode(workflow.getImage()); // Decode base64 string to bytes
+        
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.parseMediaType(workflow.getImageType()));
+            return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
         }
 }

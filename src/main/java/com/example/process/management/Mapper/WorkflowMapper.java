@@ -16,6 +16,11 @@ public class WorkflowMapper {
         dto.setId(workflow.getId());
         dto.setCreated_by(workflow.getCreated_by());
         dto.setName(workflow.getName());
+        dto.setProduct_id(workflow.getProduct_id());
+        dto.setQty(workflow.getQty());
+        dto.setStatus_id(workflow.getStatus_id());
+        dto.setImage(workflow.getImage());
+        dto.setImageType(workflow.getImageType());
         return dto ;
     }
 
@@ -29,6 +34,11 @@ public class WorkflowMapper {
         workflow.setId(dto.getId());
         workflow.setCreated_by(dto.getCreated_by());
         workflow.setName(dto.getName());
+        workflow.setProduct_id(dto.getProduct_id());
+        workflow.setQty(dto.getQty());
+        workflow.setStatus_id(dto.getStatus_id());
+        workflow.setImage(dto.getImage());
+        workflow.setImageType(dto.getImageType());
          return workflow;
     }
 }
